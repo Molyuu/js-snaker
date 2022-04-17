@@ -53,7 +53,7 @@ header {
 
 #board {
     height: 500px;
-    background-color: blue;
+    background-color: white;
     margin: 0 auto;
     position: relative;
 }
@@ -64,7 +64,7 @@ header {
 #board span {
     width: 20px;
     height: 20px;
-    background-color: yellow;
+    background-color: green;
     display: block;
     border-radius: 50%;
     z-index: 0;
