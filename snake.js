@@ -2,7 +2,16 @@ let snakeArray = []; /*初始化蛇关节的数组*/
 let isPause = false; /*游戏是否暂停：未暂停*/
 let snakeSize = 5; /*蛇的初始长度*/
 let direct = "right"; /*蛇初始方向：向右*/
-let speed = 80; /*蛇移动初始速度：80*/
+let speed = 40; /*蛇移动初始速度：40*/
+
+let hard = confirm("你要选择困难模式吗(蛇的速度增加一倍)");
+if (hard) {
+    speed = 80;
+    alert("你选择了困难模式！祝好运！");
+} else {
+    alert("你选择了简单模式！");
+}
+
 let score, timer, board, bean; /*游戏初始分数显示区，定时器，面板，豆*/
 
 // 初始化(){
@@ -238,7 +247,7 @@ function gameover() {
     //     刷新页面
     location.reload();
     //     提示游戏结束
-    alert("game over!");
+    alert("你寄了");
 }
 
 // 游戏暂停(){
