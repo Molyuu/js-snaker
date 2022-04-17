@@ -46,25 +46,26 @@ function createBean() {
     }
     //     创建新豆，每个豆都是一个span
     bean = document.createElement("span");
-    let x = null, y = null;
+    let x = null,
+        y = null;
     //     调用随机坐标()，为新豆生成出生坐标
     randomXY();
 
     //     随机坐标(){
     function randomXY() {
-//         面板宽度1000除以20（豆子宽20px），等分成500份
-//         乘以一个随机数并取整，得出一个0-500的整数
-//         乘以20得到一个0-1000范围内的20的整数倍，即横坐标
-//         纵坐标同理
-        x = parseInt("" + (Math.random() * (1000 / 20))) * 20;
-        y = parseInt("" + (Math.random() * (500 / 20))) * 20;
+        //         面板宽度1000除以20（豆子宽20px），等分成500份
+        //         乘以一个随机数并取整，得出一个0-500的整数
+        //         乘以20得到一个0-1000范围内的20的整数倍，即横坐标
+        //         纵坐标同理
+        x = parseInt("" + Math.random() * (1000 / 20)) * 20;
+        y = parseInt("" + Math.random() * (500 / 20)) * 20;
 
-//         遍历蛇关节数组{
+        //         遍历蛇关节数组{
         for (let i = 0; i < snakeArray.length; i++) {
             //             if(和当前豆的坐标冲突){
             if (snakeArray[i]["offsetLeft"] === x) {
                 if (snakeArray[i]["offsetTop"] === y) {
-//                 随机坐标();
+                    //                 随机坐标();
                     randomXY();
                     break;
                 }
@@ -72,43 +73,43 @@ function createBean() {
         }
     }
 
-//     为新豆赋值横纵坐标
+    //     为新豆赋值横纵坐标
     bean["style"]["left"] = x + "px";
     bean["style"]["top"] = y + "px";
-//     将新豆追加到面板中
+    //     将新豆追加到面板中
     board.appendChild(bean);
 }
 
 //监听键盘
 function keyListener() {
-    document.onkeydown = event => {
+    document.onkeydown = (event) => {
         let oEvent = event || window.event;
         switch (oEvent.keyCode) {
-            case 37 :
+            case 37:
                 //     按了左键：当方向不为右，方向改为左
                 if (direct !== "right") {
                     direct = "left";
                 }
                 break;
-            case 38 :
+            case 38:
                 //     按了上键：当方向不为下，方向改为上
                 if (direct !== "down") {
                     direct = "up";
                 }
                 break;
-            case 39 :
+            case 39:
                 //     按了右键：当方向不为左，方向改为右
                 if (direct !== "left") {
                     direct = "right";
                 }
                 break;
-            case 40 :
+            case 40:
                 //     按了下键：当方向不为上，方向改为下
                 if (direct !== "up") {
                     direct = "down";
                 }
                 break;
-            case 32 :
+            case 32:
                 //     按了空格键：暂停和开始游戏效果切换
                 if (!isPause) {
                     pause();
@@ -118,7 +119,7 @@ function keyListener() {
                 isPause = !isPause;
                 break;
         }
-    }
+    };
 }
 
 // 游戏开始(){
@@ -127,11 +128,11 @@ function start() {
     clearInterval(timer);
     //     开启新定时器{
     timer = setInterval(() => {
-//     蛇移动()
+        //     蛇移动()
         move();
-//     撞自己()：判断本次移动蛇是否撞到自己
+        //     撞自己()：判断本次移动蛇是否撞到自己
         isHit();
-//      吃豆子()：判断本次移动蛇是否吃到豆子
+        //      吃豆子()：判断本次移动蛇是否吃到豆子
         isEat();
     }, speed);
 }
@@ -141,18 +142,18 @@ function move() {
     //     获取蛇头左距离和上距离
     let hLeft = snakeArray[0].offsetLeft;
     let hTop = snakeArray[0].offsetTop;
-//     判断当前蛇的移动方向{
+    //     判断当前蛇的移动方向{
     switch (direct) {
         case "left":
-//         if(对应方向上出界){
+            //         if(对应方向上出界){
             if (hLeft <= 0) {
-//             游戏结束()
+                //             游戏结束()
                 gameover();
                 return;
             }
-//         蛇身移动()
+            //         蛇身移动()
             snakeBodyMove();
-//         蛇头移动
+            //         蛇头移动
             snakeArray[0]["style"]["left"] = hLeft - 20 + "px";
             break;
         case "up":
@@ -181,7 +182,7 @@ function move() {
             break;
     }
 
-//     蛇身移动(){
+    //     蛇身移动(){
     function snakeBodyMove() {
         //         循环所有蛇身{
         for (let i = snakeArray.length - 1; i > 0; i--) {
@@ -207,7 +208,6 @@ function isHit() {
         }
     }
 }
-
 
 // 吃豆子(){
 function isEat() {
@@ -241,18 +241,14 @@ function gameover() {
     alert("game over!");
 }
 
-
 // 游戏暂停(){
 function pause() {
     //     清空定时器
-    clearInterval(timer)
+    clearInterval(timer);
 }
-
 
 // 游戏重置(){
 function reset() {
     //     刷新页面
     location.reload();
 }
-
-
